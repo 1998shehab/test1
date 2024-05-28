@@ -1,0 +1,50 @@
+#!/bin/bash
+while [ true  ];
+do 
+echo -e" 1)adduser
+2)remove user
+3)update pass
+4)list all users
+5)quit
+"
+read -p "choose num from  1-5 =" num
+if [[ $num -eq 1 ]] ;
+then 
+read -p "enter user name=" name 
+sudo useradd $name
+	if [[  $? -eq 0 ]];
+	then
+	echo "username=$name added"
+	else
+	echo "error!"
+	fi
+
+elif [[ $num -eq 2 ]] 
+then 
+     read -p "enter user name=" name
+     sudo userdel $name
+     if [[ $? -eq 0 ]]
+     then
+     echo " $name deleted "
+     else 
+     echo "error"
+     fi
+     
+elif [[ $num  -eq 3 ]]
+      then
+      sudo passwd
+
+elif [[ $num  -eq 4 ]]
+then 
+echo "Name of users"
+awk -F: '$3 >999 && $3<60000 {print $1}' /etc/passwd 
+echo " number of users "
+awk -F: '$3 >999 && $3<60000 {print $1}' /etc/passwd | wc -l
+elif [[ $num  -eq 5 ]]
+then
+echo "exiting"
+break
+fi
+done
+
+
