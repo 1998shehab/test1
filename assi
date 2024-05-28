@@ -42,7 +42,7 @@ echo " number of users "
 awk -F: '$3 >999 && $3<60000 {print $1}' /etc/passwd | wc -l
 elif [[ $num  -eq 5 ]]
 then
-echo "exiting"
+echo "bye"
 break
 fi
 done
